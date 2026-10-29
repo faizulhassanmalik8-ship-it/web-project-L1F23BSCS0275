@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Reserve a table at Brew Heaven Cafe for coffee, brunch, or a catch-up with friends."
+    >
+    <title>Reserve a Table | Brew Heaven Cafe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="register.css">
+  </head>
+  <body>
+    <main class="reservation-page">
+      <a class="back-link" href="index.html"><span aria-hidden="true">←</span> Back to Brew Heaven</a>
+
+      <section class="reservation-card" aria-labelledby="reservation-title">
+        <div class="reservation-content">
+          <p class="reservation-eyebrow">A table just for you</p>
+          <h1 id="reservation-title"><span aria-hidden="true">✳</span> Reserve your spot!</h1>
+          <p class="reservation-intro">
+            Walk-ins are always welcome, but we recommend reserving a table in advance during peak hours.
+          </p>
+          <p class="form-help"><span aria-hidden="true">*</span> Required fields</p>
+
+          <form class="reservation-form" id="reservation-form">
+            <div class="field-group">
+              <label for="guest-name">Name <span aria-hidden="true">*</span></label>
+              <input id="guest-name" name="name" type="text" placeholder="Jane Smith" autocomplete="name" required>
+            </div>
+            <div class="field-group">
+              <label for="guest-phone">Phone number <span aria-hidden="true">*</span></label>
+              <input id="guest-phone" name="phone" type="tel" placeholder="Your number" autocomplete="tel" required>
+            </div>
+            <div class="field-group">
+              <label for="reservation-date">Reservation date <span aria-hidden="true">*</span></label>
+              <input id="reservation-date" name="date" type="date" required>
+            </div>
+            <div class="field-group">
+              <label for="reservation-time">Reservation time <span aria-hidden="true">*</span></label>
+              <input id="reservation-time" name="time" type="time" required>
+            </div>
+            <div class="field-group">
+              <label for="guest-count">Number of guests <span aria-hidden="true">*</span></label>
+              <input id="guest-count" name="guests" type="number" min="1" max="12" placeholder="2" required>
+            </div>
+            <div class="field-group">
+              <label for="cafe-location">Location <span aria-hidden="true">*</span></label>
+              <select id="cafe-location" name="location" required>
+                <option value="" selected disabled>Select a café</option>
+                <option value="downtown">Downtown Café</option>
+                <option value="garden">Garden District Café</option>
+                <option value="riverside">Riverside Café</option>
+              </select>
+            </div>
+            <div class="field-group field-notes">
+              <label for="reservation-notes">Notes <span class="optional-label">(optional)</span></label>
+              <textarea id="reservation-notes" name="notes" rows="3" placeholder="Any special request?"></textarea>
+            </div>
+            <button class="reserve-button" type="submit">Reserve now</button>
+            <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+            <p class="form-disclaimer">
+              Demo form: your reservation details are not sent or stored.
+            </p>
+          </form>
+        </div>
+
+        <aside class="cafe-details" aria-label="Café contact information">
+          <img
+            class="cafe-photo"
+            src="images/cafe-exterior.jpg"
+            alt="A welcoming café with outdoor tables and warm lights"
+          >
+          <div class="contact-cards">
+            <a class="contact-card" href="tel:+11234567890">
+              <span>Phone</span>
+              <strong>+1 (123) 456-7890</strong>
+            </a>
+            <a class="contact-card" href="mailto:hello@brewedandco.example">
+              <span>Email</span>
+              <strong>hello@brewedandco.example</strong>
+            </a>
+          </div>
+        </aside>
+
+        <div class="location-list" aria-label="Café locations">
+          <div>
+            <span>Downtown</span>
+            <p>Choose Downtown Café in the reservation form</p>
+          </div>
+          <div>
+            <span>Garden District</span>
+            <p>Choose Garden District Café in the reservation form</p>
+          </div>
+          <div>
+            <span>Riverside</span>
+            <p>Choose Riverside Café in the reservation form</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="reservation-footer">
+      <a href="media.html">See our coffee house gallery</a>
+      <a href="index.html">Brew Heaven Cafe</a>
+    </footer>
+
+    <script>
+      const form = document.querySelector("#reservation-form");
+      const dateInput = document.querySelector("#reservation-date");
+      const message = document.querySelector("#form-message");
+
+      const today = new Date();
+      const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000)
+        .toISOString()
+        .slice(0, 10);
+      dateInput.min = localToday;
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        if (!form.reportValidity()) {
+          return;
+        }
+
+        message.textContent =
+          "Thanks! Your reservation request is ready. Contact the café to confirm your table.";
+      });
+    </script>
+  </body>
+</html>
